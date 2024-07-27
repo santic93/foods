@@ -45,7 +45,7 @@ export const Categorie = () => {
   const handleClickInfo = (id) => {
     setInfo((prev) => ({ ...prev, [id]: !prev[id] }));
   };
-  const favoritosArray = JSON.parse(localStorage.getItem('favoritos'));
+
   return (
     <div style={{ flexGrow: 1 }}>
       <Paper
