@@ -1,0 +1,12 @@
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+main {
+  min-height: 100%;
+  padding-bottom: 64px; /* Altura del footer */
+  box-sizing: border-box;
+}
