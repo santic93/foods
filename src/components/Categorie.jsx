@@ -23,14 +23,29 @@ export const Categorie = () => {
   useEffect(() => {
     categorie(pat.id);
   }, []);
-  const [favorite, setFavorite] = useState({});
+
+  const [favoritos, setFavoritos] = useState(() => {
+    // Inicializar desde localStorage
+    const favoritosGuardados = localStorage.getItem('favoritos');
+    return favoritosGuardados ? JSON.parse(favoritosGuardados) : [];
+  });
   const [info, setInfo] = useState({});
-  const handleClick = (id) => {
-    setFavorite((prev) => ({ ...prev, [id]: !prev[id] }));
+  const handleClick = (cat) => {
+    let nuevosFavoritos;
+    if (favoritos.some((fav) => fav.idMeal === cat.idMeal)) {
+      // Eliminar de favoritos
+      nuevosFavoritos = favoritos.filter((fav) => fav.idMeal !== cat.idMeal);
+    } else {
+      // Agregar a favoritos
+      nuevosFavoritos = [...favoritos, cat];
+    }
+    setFavoritos(nuevosFavoritos);
+    localStorage.setItem('favoritos', JSON.stringify(nuevosFavoritos));
   };
   const handleClickInfo = (id) => {
     setInfo((prev) => ({ ...prev, [id]: !prev[id] }));
   };
+  const favoritosArray = JSON.parse(localStorage.getItem('favoritos'));
   return (
     <div style={{ flexGrow: 1 }}>
       <Paper
@@ -40,7 +55,7 @@ export const Categorie = () => {
           flexWrap: 'wrap',
           alignItems: 'center',
           justifyContent: 'space-around',
-          backgroundColor: '#4aedc4',
+          backgroundColor: '#c5cae9',
         }}
       >
         <Grid container spacing={2}>
@@ -85,10 +100,16 @@ export const Categorie = () => {
                   >
                     <IconButton
                       aria-label='favorite'
-                      onClick={() => handleClick(cat.idMeal)}
+                      onClick={() => handleClick(cat)}
                     >
                       <FavoriteIcon
-                        sx={{ color: favorite[cat.idMeal] ? '#ba000d' : '' }}
+                        sx={{
+                          color: favoritos.some(
+                            (fav) => fav.idMeal === cat.idMeal
+                          )
+                            ? '#ba000d'
+                            : '',
+                        }}
                       />
                     </IconButton>
                     <IconButton
