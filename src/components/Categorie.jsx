@@ -23,13 +23,12 @@ export const Categorie = () => {
   useEffect(() => {
     categorie(pat.id);
   }, []);
-
+  console.log(pat);
   const [favoritos, setFavoritos] = useState(() => {
     // Inicializar desde localStorage
     const favoritosGuardados = localStorage.getItem('favoritos');
     return favoritosGuardados ? JSON.parse(favoritosGuardados) : [];
   });
-  const [info, setInfo] = useState({});
   const handleClick = (cat) => {
     let nuevosFavoritos;
     if (favoritos.some((fav) => fav.idMeal === cat.idMeal)) {
@@ -43,9 +42,23 @@ export const Categorie = () => {
     localStorage.setItem('favoritos', JSON.stringify(nuevosFavoritos));
   };
 
-
   return (
     <div style={{ flexGrow: 1 }}>
+      <Typography
+        variant='h2'
+        component='h3'
+        sx={{
+          textAlign: 'center',
+          fontStyle: 'italic',
+          fontWeight: 'bold',
+          textDecorationLine: 'underline',
+          textShadow: '1px 1.5px 1px white',
+          letterSpacing: '5px',
+          color: '#3f51b5',
+        }}
+      >
+        {pat.id}
+      </Typography>
       <Box
         style={{
           margin: 20,
@@ -111,13 +124,10 @@ export const Categorie = () => {
                       />
                     </IconButton>
                     <Link
-                     to={`info/${cat.strMeal}`}
+                      to={`info/${cat.strMeal}`}
                       style={{ textDecoration: 'none' }}
                     >
-                      <IconButton
-                        aria-label='info'
-                     
-                      >
+                      <IconButton aria-label='info'>
                         <InfoIcon />
                       </IconButton>
                     </Link>

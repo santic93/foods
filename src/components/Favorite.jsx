@@ -16,6 +16,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { Box, Grid, Paper } from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
+import { Link } from 'react-router-dom';
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -55,16 +56,29 @@ export default function Favorite() {
     setInfo((prev) => ({ ...prev, [id]: !prev[id] }));
   };
   return (
-    <div style={{  }}>
-      <Paper
+    <div style={{}}>
+      <Typography
+        variant='h2'
+        component='h3'
+        sx={{
+          textAlign: 'center',
+          fontStyle: 'italic',
+          fontWeight: 'bold',
+          textDecorationLine: 'underline',
+          textShadow: '1px 1.5px 1px white',
+          letterSpacing: '5px',
+          color: '#3f51b5',
+        }}
+      >
+        Favoritos
+      </Typography>
+      <Box
         style={{
-          margin: 25,
+          margin: 20,
           display: 'flex',
           flexWrap: 'wrap',
           alignItems: 'center',
           justifyContent: 'space-around',
-          backgroundColor: '#eeeeee',
-          flexDirection: 'row',
         }}
       >
         <Grid container spacing={2}>
@@ -73,12 +87,12 @@ export default function Favorite() {
               <Grid item xs={12} sm={6} md={4}>
                 <Card
                   sx={{
-                    maxWidth: 345,
+                    maxWidth: '50%',
                     height: '100%',
                     display: 'flex',
                     flexWrap: 'wrap',
-                    justifyContent: 'center',
-                    flexDirection: 'row',
+                    justifyContent: 'space-around',
+                    flexDirection: 'column',
                     alignItems: 'center',
                   }}
                 >
@@ -110,14 +124,6 @@ export default function Favorite() {
                         }}
                       />
                     </IconButton>
-                    <IconButton
-                      aria-label='info'
-                      onClick={() => handleClickInfo(favorite.idMeal)}
-                    >
-                      <InfoIcon
-                        sx={{ color: info[favorite.idMeal] ? '#33eaff' : '' }}
-                      />
-                    </IconButton>
                   </div>
                 </Card>
               </Grid>
@@ -143,7 +149,7 @@ export default function Favorite() {
             </Grid>
           )}
         </Grid>
-      </Paper>
+      </Box>
     </div>
   );
 }
