@@ -10,7 +10,7 @@ const Footer = () => {
       sx={{
         top: 'auto',
         bottom: 0,
-        backgroundColor: '#f44336',
+        backgroundColor: '#263238',
       }}
     >
       <Container
@@ -30,15 +30,6 @@ const Footer = () => {
           >
             © 2024 Foods
           </Typography>
-          {/* <Link href='#' color='inherit' sx={{ mx: 1 }}>
-            Home
-          </Link>
-          <Link href='#' color='inherit' sx={{ mx: 1 }}>
-            About
-          </Link>
-          <Link href='#' color='inherit' sx={{ mx: 1 }}>
-            Contact
-          </Link> */}
         </Toolbar>
       </Container>
     </AppBar>

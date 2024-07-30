@@ -17,14 +17,14 @@ export const Categories = () => {
 
   return (
     <div style={{ flexGrow: 1 }}>
-      <Paper
+      <Box
         style={{
           margin: 20,
           display: 'flex',
           flexWrap: 'wrap',
           alignItems: 'center',
           justifyContent: 'space-around',
-          backgroundColor: '#eeeeee',
+          //backgroundColor: '#eeeeee',
         }}
       >
         <h3
@@ -32,10 +32,10 @@ export const Categories = () => {
             fontSize: 'bold',
             textTransform: 'uppercase',
             letterSpacing: 3,
-            color: '#ba000d',
+            color: '#2e7d32',
           }}
         >
-        All categories
+          All categories
         </h3>
         <Grid container spacing={2}>
           {categoriesFood?.map((cat, index) => (
@@ -77,9 +77,9 @@ export const Categories = () => {
                         fontWeight: 'bold',
                         letterSpacing: 2,
                         fontSize: 20,
-                        color: '#ff7961',
+                        color: '#2e7d32',
                         '&:hover': {
-                          color: '#ba000d', // Color cuando se hace hover
+                          color: '#8bc34a', // Color cuando se hace hover
                           cursor: 'pointer', // Cambia el cursor a pointer
                         },
                       }}
@@ -92,7 +92,7 @@ export const Categories = () => {
                 <small>
                   <b
                     style={{
-                      color: hoveredIndex === index ? '#000298' : 'inherit',
+                      color: hoveredIndex === index ? '#2e7d32' : 'inherit',
                     }}
                   >
                     {hoveredIndex === index &&
@@ -115,7 +115,7 @@ export const Categories = () => {
             </Grid>
           ))}
         </Grid>
-      </Paper>
+      </Box>
     </div>
   );
 };

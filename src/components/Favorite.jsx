@@ -55,10 +55,10 @@ export default function Favorite() {
     setInfo((prev) => ({ ...prev, [id]: !prev[id] }));
   };
   return (
-    <div style={{ flexGrow: 1 }}>
+    <div style={{  }}>
       <Paper
         style={{
-          margin: 20,
+          margin: 25,
           display: 'flex',
           flexWrap: 'wrap',
           alignItems: 'center',
@@ -89,7 +89,7 @@ export default function Favorite() {
                     image={favorite.strMealThumb}
                     alt={favorite.strMeal}
                   />
-                              <div
+                  <div
                     style={{
                       display: 'flex',
                       justifyContent: 'space-between',
@@ -120,7 +120,6 @@ export default function Favorite() {
                     </IconButton>
                   </div>
                 </Card>
-    
               </Grid>
             ))
           ) : (
@@ -140,7 +139,7 @@ export default function Favorite() {
                 flexDirection: 'column',
               }}
             >
-              <Typography variant='h1'>Todavia no tiene favoritos</Typography>
+              <Typography variant='h2'>Todavia no tiene favoritos</Typography>
             </Grid>
           )}
         </Grid>

@@ -48,14 +48,14 @@ export const Categorie = () => {
 
   return (
     <div style={{ flexGrow: 1 }}>
-      <Paper
+      <Box
         style={{
           margin: 20,
           display: 'flex',
           flexWrap: 'wrap',
           alignItems: 'center',
           justifyContent: 'space-around',
-          backgroundColor: '#c5cae9',
+          // backgroundColor: '#c5cae9',
         }}
       >
         <Grid container spacing={2}>
@@ -126,7 +126,7 @@ export const Categorie = () => {
             </Grid>
           ))}
         </Grid>
-      </Paper>
+      </Box>
     </div>
   );
 };
