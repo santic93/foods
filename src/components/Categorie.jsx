@@ -42,9 +42,7 @@ export const Categorie = () => {
     setFavoritos(nuevosFavoritos);
     localStorage.setItem('favoritos', JSON.stringify(nuevosFavoritos));
   };
-  const handleClickInfo = (id) => {
-    setInfo((prev) => ({ ...prev, [id]: !prev[id] }));
-  };
+
 
   return (
     <div style={{ flexGrow: 1 }}>
@@ -112,14 +110,17 @@ export const Categorie = () => {
                         }}
                       />
                     </IconButton>
-                    <IconButton
-                      aria-label='info'
-                      onClick={() => handleClickInfo(cat.idMeal)}
+                    <Link
+                     to={`info/${cat.strMeal}`}
+                      style={{ textDecoration: 'none' }}
                     >
-                      <InfoIcon
-                        sx={{ color: info[cat.idMeal] ? '#33eaff' : '' }}
-                      />
-                    </IconButton>
+                      <IconButton
+                        aria-label='info'
+                     
+                      >
+                        <InfoIcon />
+                      </IconButton>
+                    </Link>
                   </div>
                 </CardContent>
               </Card>

@@ -3,6 +3,7 @@ import { Categorie } from './components/Categorie';
 import { Categories } from './components/Categories';
 import Favorite from './components/Favorite';
 import { RandomMeals } from './components/RandomMeals';
+import { InfoFood } from './components/InfoFood';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path='categorie/:id' element={<Categorie />} />
         <Route path='/favorites' element={<Favorite />} />
         <Route path='/randomMeals' element={<RandomMeals />} />
+        <Route path='categorie/:categoryId/info/:mealId' element={<InfoFood />} />
       </Routes>
     </>
   );
