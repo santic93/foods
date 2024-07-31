@@ -21,16 +21,30 @@ import { Image, Padding } from '@mui/icons-material';
 import { ListIngredients } from './ListIngredients';
 import { Link } from 'react-router-dom';
 
-export const RandomMeals = ({ details }) => {
+export const RandomMeals = ({ details: initialDetails }) => {
   const { aleatorie, aleatorieCat } = useAleatorieCategorie();
+  const [change, setChange] = useState(false);
+  const [details, setDetails] = useState(initialDetails || []);
+  useEffect(() => {
+    if (initialDetails && initialDetails.length > 0) {
+      setDetails(initialDetails);
+    }
+  }, [initialDetails]);
+
   useEffect(() => {
     aleatorieCat();
-  }, []);
+  }, [change]);
   const [expanded, setExpanded] = useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+  const handleChangeMeal = () => {
+
+    setDetails([]); // Limpia details
+    setChange((prev) => !prev);
+  };
+  const mealsToRender = details.length ? details : aleatorie;
 
   return (
     <>
@@ -56,122 +70,60 @@ export const RandomMeals = ({ details }) => {
           flexWrap: 'wrap',
           alignItems: 'center',
           justifyContent: 'space-around',
-       
         }}
       >
-        {details ? (
-          <>
-            {details?.map((food) => (
-              <Card sx={{ maxWidth: 345, m: 2 }} key={food.idMeal}>
-                <CardMedia
-                  component='img'
-                  height='140'
-                  image={food.strMealThumb}
-                  alt={food.strMeal}
-                />
-                <CardContent>
-                  <Typography gutterBottom variant='h5' component='div'>
-                    {food.strMeal}
-                  </Typography>
-                  <Typography variant='body2' color='text.secondary'>
-                    {food.strInstructions}
-                  </Typography>
-                  {expanded && <ListIngredients food={food} />}
-                </CardContent>
+        <>
+          {mealsToRender?.map((food) => (
+            <Card sx={{ maxWidth: 345, m: 2 }} key={food.idMeal}>
+              <CardMedia
+                component='img'
+                height='140'
+                image={food.strMealThumb}
+                alt={food.strMeal}
+              />
+              <CardContent>
+                <Typography gutterBottom variant='h5' component='div'>
+                  {food.strMeal}
+                </Typography>
+                <Typography variant='body2' color='text.secondary'>
+                  {food.strInstructions}
+                </Typography>
+                {expanded && <ListIngredients food={food} />}
+              </CardContent>
 
-                <CardActions>
-                  <ButtonGroup
-                    variant='outlined'
-                    aria-label='Basic button group'
-                  >
-                    <Button size='small'>
-                      <a
-                        href={food.strYoutube}
-                        target='_blank'
-                        rel='noopener noreferrer'
-                        style={{ color: 'inherit', textDecoration: 'none' }}
-                      >
-                        Watch on YouTube
-                      </a>
+              <CardActions>
+                <ButtonGroup variant='outlined' aria-label='Basic button group'>
+                  <Button size='small'>
+                    <a
+                      href={food.strYoutube}
+                      target='_blank'
+                      rel='noopener noreferrer'
+                      style={{ color: 'inherit', textDecoration: 'none' }}
+                    >
+                      Watch on YouTube
+                    </a>
+                  </Button>
+                  <Button size='small' onClick={handleChangeMeal}>
+                    Change food
+                  </Button>
+                  {expanded ? (
+                    <Button size='small' onClick={handleExpandClick}>
+                      Viewing Ingredients
                     </Button>
-                    <Button size='small' onClick={() => aleatorieCat()}>
-                      Change food
+                  ) : (
+                    <Button
+                      size='small'
+                      onClick={handleExpandClick}
+                      sx={{ padding: 2.5 }}
+                    >
+                      Ingredients
                     </Button>
-                    {expanded ? (
-                      <Button size='small' onClick={handleExpandClick}>
-                        Viewing Ingredients
-                      </Button>
-                    ) : (
-                      <Button
-                        size='small'
-                        onClick={handleExpandClick}
-                        sx={{ padding: 2.5 }}
-                      >
-                        Ingredients
-                      </Button>
-                    )}
-                  </ButtonGroup>
-                </CardActions>
-              </Card>
-            ))}
-          </>
-        ) : (
-          <>
-            {aleatorie?.map((food) => (
-              <Card sx={{ maxWidth: 345, m: 2 }} key={food.idMeal}>
-                <CardMedia
-                  component='img'
-                  height='140'
-                  image={food.strMealThumb}
-                  alt={food.strMeal}
-                />
-                <CardContent>
-                  <Typography gutterBottom variant='h5' component='div'>
-                    {food.strMeal}
-                  </Typography>
-                  <Typography variant='body2' color='text.secondary'>
-                    {food.strInstructions}
-                  </Typography>
-                  {expanded && <ListIngredients food={food} />}
-                </CardContent>
-
-                <CardActions>
-                  <ButtonGroup
-                    variant='outlined'
-                    aria-label='Basic button group'
-                  >
-                    <Button size='small'>
-                      <a
-                        href={food.strYoutube}
-                        target='_blank'
-                        rel='noopener noreferrer'
-                        style={{ color: 'inherit', textDecoration: 'none' }}
-                      >
-                        Watch on YouTube
-                      </a>
-                    </Button>
-                    <Button size='small' onClick={() => aleatorieCat()}>
-                      Change food
-                    </Button>
-                    {expanded ? (
-                      <Button size='small' onClick={handleExpandClick}>
-                        Viewing Ingredients
-                      </Button>
-                    ) : (
-                      <Button
-                        size='small'
-                        onClick={handleExpandClick}
-                        sx={{ padding: 2.5 }}
-                      >
-                        Ingredients
-                      </Button>
-                    )}
-                  </ButtonGroup>
-                </CardActions>
-              </Card>
-            ))}
-          </>
-        )}
+                  )}
+                </ButtonGroup>
+              </CardActions>
+            </Card>
+          ))}
+        </>
       </Box>
     </>
   );

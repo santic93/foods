@@ -23,7 +23,7 @@ export const Categorie = () => {
   useEffect(() => {
     categorie(pat.id);
   }, []);
-  console.log(pat);
+
   const [favoritos, setFavoritos] = useState(() => {
     // Inicializar desde localStorage
     const favoritosGuardados = localStorage.getItem('favoritos');

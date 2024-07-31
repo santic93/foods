@@ -7,6 +7,7 @@ export const useAleatorieCategorie = () => {
   const [aleatorie, setAleatori] = useState();
 
   const aleatorieCat = async () => {
+
     try {
       const resp = await axios.get(url);
       setAleatori(resp.data.meals);

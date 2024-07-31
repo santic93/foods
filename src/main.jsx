@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App.jsx';
+import App from './MealsApp.jsx';
 import { Layout } from './ui/Layout.jsx';
 import '../index.css';
 import { BrowserRouter } from 'react-router-dom';

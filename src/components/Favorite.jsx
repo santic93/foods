@@ -3,20 +3,16 @@ import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
-import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
-import Collapse from '@mui/material/Collapse';
-import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import { red } from '@mui/material/colors';
+
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { Box, Grid, Paper } from '@mui/material';
-import InfoIcon from '@mui/icons-material/Info';
-import { Link } from 'react-router-dom';
+
+import { Box, Button, Grid, Paper, Stack } from '@mui/material';
+
+import DeleteIcon from '@mui/icons-material/Delete';
+import SendIcon from '@mui/icons-material/Send';
+
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -30,10 +26,6 @@ const ExpandMore = styled((props) => {
 
 export default function Favorite() {
   const favoritosGuardados = JSON.parse(localStorage.getItem('favoritos'));
-  const [expanded, setExpanded] = React.useState(false);
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
   const [favoritos, setFavoritos] = React.useState(() => {
     // Inicializar desde localStorage
     const favoritosGuardados = localStorage.getItem('favoritos');
@@ -52,8 +44,9 @@ export default function Favorite() {
     setFavoritos(nuevosFavoritos);
     localStorage.setItem('favoritos', JSON.stringify(nuevosFavoritos));
   };
-  const handleClickInfo = (id) => {
-    setInfo((prev) => ({ ...prev, [id]: !prev[id] }));
+  const handleDelete = () => {
+    localStorage.removeItem('favoritos');
+    setFavoritos([]);
   };
   return (
     <div style={{}}>
@@ -72,6 +65,25 @@ export default function Favorite() {
       >
         Favoritos
       </Typography>
+      <Stack
+        direction='row'
+        spacing={2}
+        sx={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <Button
+          variant='outlined'
+          startIcon={<DeleteIcon />}
+          color='error'
+          onClick={handleDelete}
+        >
+          Delete all favorites
+        </Button>
+      </Stack>
       <Box
         style={{
           margin: 20,
