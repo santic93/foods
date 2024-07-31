@@ -79,6 +79,7 @@ export default function Favorite() {
           variant='outlined'
           startIcon={<DeleteIcon />}
           color='error'
+          disabled={!favoritosGuardados}
           onClick={handleDelete}
         >
           Delete all favorites

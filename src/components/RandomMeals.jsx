@@ -40,7 +40,6 @@ export const RandomMeals = ({ details: initialDetails }) => {
     setExpanded(!expanded);
   };
   const handleChangeMeal = () => {
-
     setDetails([]); // Limpia details
     setChange((prev) => !prev);
   };
@@ -74,18 +73,44 @@ export const RandomMeals = ({ details: initialDetails }) => {
       >
         <>
           {mealsToRender?.map((food) => (
-            <Card sx={{ maxWidth: 345, m: 2 }} key={food.idMeal}>
+            <Card
+              sx={{
+                maxWidth: 350,
+                m: 2,
+                display: 'flex',
+                flexWrap: 'wrap',
+                p: 2,
+                maxHeight: '100vh',
+              }}
+              key={food.idMeal}
+            >
               <CardMedia
                 component='img'
-                height='140'
+                height='150'
                 image={food.strMealThumb}
                 alt={food.strMeal}
               />
-              <CardContent>
-                <Typography gutterBottom variant='h5' component='div'>
+              <CardContent
+                sx={{
+                  display: 'flex',
+                  flexWrap: 'wrap',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
+              >
+                <Typography
+                  gutterBottom
+                  variant='h5'
+                  component='div'
+                  sx={{ fontWeight: 'bold', fontStyle: 'italic' }}
+                >
                   {food.strMeal}
                 </Typography>
-                <Typography variant='body2' color='text.secondary'>
+                <Typography
+                  variant='body2'
+                  color='#ab003c'
+                  sx={{ fontWeight: 'bold' }}
+                >
                   {food.strInstructions}
                 </Typography>
                 {expanded && <ListIngredients food={food} />}
