@@ -62,98 +62,103 @@ export const RandomMeals = ({ details: initialDetails }) => {
       >
         Random
       </Typography>
-        <Box
-          style={{
-            margin: 20,
-            display: 'flex',
-            flexWrap: 'wrap',
-            alignItems: 'center',
-            justifyContent: 'space-around',
-          }}
-        >
-          <>
-            {mealsToRender?.map((food) => (
-              <Card
+      <Box
+        style={{
+          margin: 20,
+          display: 'flex',
+          flexWrap: 'wrap',
+          alignItems: 'center',
+          justifyContent: 'space-around',
+        }}
+      >
+        <>
+          {mealsToRender?.map((food) => (
+            <Card
+              sx={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                justifyContent: 'center',
+                alignItems: 'center',
+                flexWrap: 'wrap',
+                margin: 2,
+                flexDirection: 'row',
+                // maxWidth: 350,
+                // m: 2,
+                // display: 'flex',
+                // flexWrap: 'wrap',
+                // flexDirection: 'column',
+                // p: 2,
+                // maxHeight: 450,
+              }}
+              key={food.idMeal}
+            >
+              <CardMedia
+                component='img'
+                height='150'
+                image={food.strMealThumb}
+                alt={food.strMeal}
+              />
+              <CardContent
                 sx={{
-                  maxWidth: 350,
-                  m: 2,
-                  display: 'flex',
-                  flexWrap: 'wrap',
-                  flexDirection: 'column',
-                  p: 2,
-                  maxHeight: 450,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  maxHeight: 200,
+                  overflow: 'auto',
+                  textAlign: 'center',
                 }}
-                key={food.idMeal}
               >
-                <CardMedia
-                  component='img'
-                  height='150'
-                  image={food.strMealThumb}
-                  alt={food.strMeal}
-                />
-                <CardContent
-                  sx={{
-                    display: 'flex',
-                    flexDirection: 'column', 
-                    flexWrap: 'wrap',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    maxHeight: 200, 
-                    overflow: 'auto', 
-                  }}
+                <Typography
+                  gutterBottom
+                  variant='h5'
+                  component='div'
+                  sx={{ fontWeight: 'bold', fontStyle: 'italic' }}
                 >
-                  <Typography
-                    gutterBottom
-                    variant='h5'
-                    component='div'
-                    sx={{ fontWeight: 'bold', fontStyle: 'italic' }}
-                  >
-                    {food.strMeal}
-                  </Typography>
-                  <Typography
-                    variant='body2'
-                    color='#ab003c'
-                    sx={{ fontWeight: 'bold' }}
-                  >
-                    {food.strInstructions}
-                  </Typography>
-                  {expanded && <ListIngredients food={food} />}
-                </CardContent>
+                  {food.strMeal}
+                </Typography>
+                <Typography
+                  variant='body2'
+                  color='#ab003c'
+                  sx={{ fontWeight: 'bold' }}
+                >
+                  {food.strInstructions}
+                </Typography>
+                {expanded && <ListIngredients food={food} />}
+              </CardContent>
 
-                <CardActions>
-                  <ButtonGroup variant='outlined' aria-label='Basic button group'>
-                    <Button size='small'>
-                      <a
-                        href={food.strYoutube}
-                        target='_blank'
-                        rel='noopener noreferrer'
-                        style={{ color: 'inherit', textDecoration: 'none' }}
-                      >
-                        Watch on YouTube
-                      </a>
+              <CardActions>
+                <ButtonGroup variant='outlined' aria-label='Basic button group'>
+                  <Button size='small'>
+                    <a
+                      href={food.strYoutube}
+                      target='_blank'
+                      rel='noopener noreferrer'
+                      style={{ color: 'inherit', textDecoration: 'none' }}
+                    >
+                      Watch on YouTube
+                    </a>
+                  </Button>
+                  <Button size='small' onClick={handleChangeMeal}>
+                    Change food
+                  </Button>
+                  {expanded ? (
+                    <Button size='small' onClick={handleExpandClick}>
+                      Viewing Ingredients
                     </Button>
-                    <Button size='small' onClick={handleChangeMeal}>
-                      Change food
+                  ) : (
+                    <Button
+                      size='small'
+                      onClick={handleExpandClick}
+                      sx={{ padding: 2.5 }}
+                    >
+                      Ingredients
                     </Button>
-                    {expanded ? (
-                      <Button size='small' onClick={handleExpandClick}>
-                        Viewing Ingredients
-                      </Button>
-                    ) : (
-                      <Button
-                        size='small'
-                        onClick={handleExpandClick}
-                        sx={{ padding: 2.5 }}
-                      >
-                        Ingredients
-                      </Button>
-                    )}
-                  </ButtonGroup>
-                </CardActions>
-              </Card>
-            ))}
-          </>
-        </Box>
+                  )}
+                </ButtonGroup>
+              </CardActions>
+            </Card>
+          ))}
+        </>
+      </Box>
     </>
   );
 };
